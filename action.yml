@@ -1,0 +1,35 @@
+name: Secrets
+description: Write secrets in your GitHub respository from the workflow
+author: 'Shibly Meeran'
+inputs:
+  github-token:
+    description: GitHub token to authenticate and write the secrets (should have )
+    required: true
+  owner:
+    description: The GitHub organization/user name
+    required: true
+  repo:
+    description: The GitHub repository name (for repository secrets)
+    required: false
+  environment:
+    description: The name of the environment to write the secret to
+    required: false
+  secret-name:
+    description: The name of the secret to write
+    required: true
+  secret-value:
+    description: The value of the secret to write
+    required: false
+  overwrite:
+    description: Whether to overwrite the secret if it already exists
+    default: "true"
+    required: false
+outputs:
+  secret-existed:
+    description: Whether the secret already existed
+branding:
+  icon: 'unlock'
+  color: 'white'
+runs:
+  using: node20
+  main: dist/index.js
