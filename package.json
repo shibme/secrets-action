@@ -11,7 +11,8 @@
   },
   "keywords": [
     "actions",
-    "secrets"
+    "secrets",
+    "secrets-action"
   ],
   "homepage": "https://github.com/amagioss/secrets-action",
   "license": "MIT",

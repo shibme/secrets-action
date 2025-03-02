@@ -1,4 +1,4 @@
-name: Secrets
+name: Secrets Action
 description: Write secrets in your GitHub respository from the workflow
 author: 'Shibly Meeran'
 inputs:
