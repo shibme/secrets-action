@@ -9,7 +9,7 @@ You can use the action in your workflow as follows:
 
 ```yaml
 - name: Write secret
-  uses: actions/secrets-action@v1.0.0
+  uses: actions/secrets-action@v1
   with:
     github-token: ${{ secrets.GH_TOKEN_WITH_SECRET_READ_WRITE_PERMISSION }}
     owner: 'my-org'
