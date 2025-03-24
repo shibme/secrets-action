@@ -23,7 +23,8 @@ The action requires the following permissions:
 - Read and Write permission to organization secrets
 - Read and Write permission to repository secrets
 - Read and Write permission to repository environments
-The scope of the permissions depends on the type of the secret (org, repo or environment) you are trying to write.
+
+> *The scope of the permissions depends on the type of the secret (org, repo or environment) you are trying to write.*
 
 ## Inputs
 The actions supports the following inputs:
