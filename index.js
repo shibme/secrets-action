@@ -1,6 +1,8 @@
-const core = require('@actions/core');
-const sodium = require('libsodium-wrappers');
-const { Octokit } = require("@octokit/rest");
+import * as core from '@actions/core';
+import sodium from 'libsodium-wrappers';
+import { Octokit } from '@octokit/rest';
+import { createTokenAuth } from '@octokit/auth-token';
+import { fileURLToPath } from 'node:url';
 
 const token = core.getInput('github-token');
 const userAgent = 'secrets-action';
@@ -13,7 +15,6 @@ const overwrite = core.getInput('overwrite').toLowerCase() === 'true';
 
 let octokit;
 if (token) {
-  const { createTokenAuth } = "@octokit/auth-token";
   octokit = new Octokit({
     authStrategy: createTokenAuth,
     auth: token,
@@ -145,16 +146,14 @@ async function run() {
     core.setOutput('secret-existed', exists);
     if (overwrite || !exists) {
       await putSecret(owner, repo, environment, secretName, secretValue);
-    } else {
-      await putSecret(owner, repo, environment, secretName, secretValue);
     }
   } catch (error) {
     core.setFailed(error);
   }
 }
 
-module.exports = run
+export default run;
 
-if (require.main === module) {
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
   run();
 }
