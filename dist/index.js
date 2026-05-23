@@ -35335,7 +35335,6 @@ var external_node_url_ = __nccwpck_require__(3136);
 
 
 
-
 const token = getInput('github-token');
 const index_userAgent = 'secrets-action';
 const owner = getInput('owner');
@@ -35345,18 +35344,10 @@ const secretName = getInput('secret-name');
 const secretValue = getInput('secret-value');
 const overwrite = getInput('overwrite').toLowerCase() === 'true';
 
-let octokit;
-if (token) {
-  octokit = new dist_src_Octokit({
-    authStrategy: createTokenAuth,
-    auth: token,
-    userAgent: index_userAgent,
-  });
-} else {
-  octokit = new dist_src_Octokit({
-    userAgent: index_userAgent,
-  });
-}
+const octokit = new dist_src_Octokit({
+  auth: token || undefined,
+  userAgent: index_userAgent,
+});
 
 async function encryptSecret(secret, key) {
   await libsodium_wrappers.ready;

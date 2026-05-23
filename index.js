@@ -1,7 +1,6 @@
 import * as core from '@actions/core';
 import sodium from 'libsodium-wrappers';
 import { Octokit } from '@octokit/rest';
-import { createTokenAuth } from '@octokit/auth-token';
 import { fileURLToPath } from 'node:url';
 
 const token = core.getInput('github-token');
@@ -13,18 +12,10 @@ const secretName = core.getInput('secret-name');
 const secretValue = core.getInput('secret-value');
 const overwrite = core.getInput('overwrite').toLowerCase() === 'true';
 
-let octokit;
-if (token) {
-  octokit = new Octokit({
-    authStrategy: createTokenAuth,
-    auth: token,
-    userAgent: userAgent,
-  });
-} else {
-  octokit = new Octokit({
-    userAgent: userAgent,
-  });
-}
+const octokit = new Octokit({
+  auth: token || undefined,
+  userAgent: userAgent,
+});
 
 async function encryptSecret(secret, key) {
   await sodium.ready;
